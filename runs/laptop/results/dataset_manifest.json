@@ -1,0 +1,24 @@
+{
+  "dataset": "cfilt/iitb-english-hindi",
+  "revision": "321516f50bdcc1214fa75164c545478976ed84bd",
+  "config_hash": "d148c390f0eed02f33281c6c84147227130c4f29049bdb147e3fb6fa6a0da432",
+  "splits": {
+    "test": {
+      "scanned": 2507,
+      "eligible": 2503,
+      "selected": 300
+    },
+    "validation": {
+      "scanned": 520,
+      "eligible": 520,
+      "selected": 300
+    },
+    "train": {
+      "scanned": 1659083,
+      "eligible": 927069,
+      "selected": 20000
+    }
+  },
+  "test_hash": "277e8288e56ba73a6015ebb92ce3cea16b728f997622438cfa853db2ffff73b4",
+  "normalization": "NFC; whitespace collapse; script/length filters; source and target deduplication"
+}

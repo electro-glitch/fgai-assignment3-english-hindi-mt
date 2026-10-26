@@ -1,0 +1,38 @@
+[
+  {
+    "model": "basic",
+    "temperature": 0.0,
+    "runs": 1,
+    "bleu_mean": 0.6515191558708109,
+    "bleu_sd": 0.0,
+    "chrf_mean": 13.660837103897869,
+    "chrf_sd": 0.0
+  },
+  {
+    "model": "basic",
+    "temperature": 0.3,
+    "runs": 3,
+    "bleu_mean": 0.5219850499859665,
+    "bleu_sd": 0.08646838815095564,
+    "chrf_mean": 14.14485760158685,
+    "chrf_sd": 0.12375950145137744
+  },
+  {
+    "model": "basic",
+    "temperature": 0.7,
+    "runs": 3,
+    "bleu_mean": 0.5221732458856367,
+    "bleu_sd": 0.09043108558068584,
+    "chrf_mean": 14.204115039804842,
+    "chrf_sd": 0.16077446420224328
+  },
+  {
+    "model": "basic",
+    "temperature": 1.0,
+    "runs": 3,
+    "bleu_mean": 0.32593375163365396,
+    "bleu_sd": 0.03537990437986298,
+    "chrf_mean": 13.39752944960689,
+    "chrf_sd": 0.30264979374817524
+  }
+]

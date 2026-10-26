@@ -1,0 +1,2 @@
+﻿model,bleu,chrf,training_seconds,inference_seconds,seconds_per_sentence,parameters,trainable_parameters,peak_cuda_allocated_mb,truncated_inputs,capped_outputs,device,adaptation
+basic,0.4897377728720462,12.912040964709892,23263.040912099998,128.5253115000669,0.42841770500022297,6195776,6195776,48.048828125,0,90,cuda,trained from scratch

@@ -1,0 +1,18 @@
+Foundations of Generative AI ICT4403
+Assignment 3
+
+Student name: [ENTER STUDENT NAME]
+Registration number: [ENTER REGISTRATION NUMBER]
+
+System title:
+English to Hindi Translation with Transformer mT5 LLaMA and Gemma
+
+Dataset:
+IIT Bombay English-Hindi Parallel Corpus
+https://huggingface.co/datasets/cfilt/iitb-english-hindi
+
+GitHub repository:
+[ENTER VERIFIED GITHUB REPOSITORY URL]
+
+Save the completed Word document as YourName_RegNum_FGAI_Assignment3.docx.
+Export to PDF and verify the links before LMS submission.

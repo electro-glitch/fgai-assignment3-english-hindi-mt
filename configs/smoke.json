@@ -1,0 +1,37 @@
+{
+  "seed": 42,
+  "train_size": 128,
+  "validation_size": 16,
+  "test_size": 16,
+  "max_chars": 400,
+  "max_length": 96,
+  "max_new_tokens": 96,
+  "vocab_size": 1000,
+  "d_model": 64,
+  "heads": 4,
+  "layers": 2,
+  "feedforward": 128,
+  "dropout": 0.1,
+  "basic_batch_size": 16,
+  "basic_epochs": 2,
+  "basic_lr": 0.0003,
+  "mt5_epochs": 1,
+  "mt5_lr": 0.0003,
+  "mt5_batch_size": 1,
+  "gradient_accumulation": 16,
+  "lora_rank": 8,
+  "temperatures": [
+    0.3,
+    0.7,
+    1.0
+  ],
+  "temperature_seeds": [
+    42,
+    43,
+    44
+  ],
+  "temperature_samples": 4,
+  "mt5_model": "google/mt5-small",
+  "llama_model": "meta-llama/Llama-3.2-1B-Instruct",
+  "gemma_model": "google/gemma-3-1b-it"
+}

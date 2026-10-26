@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.cache/
+data/
+**/data/
+checkpoints/
+**/checkpoints/
+*.log
+*.tmp
+.env
+submission/
+tmp/
