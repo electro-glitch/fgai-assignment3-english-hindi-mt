@@ -214,7 +214,7 @@ def prompt(text):
 def predict(name, model, tokenizer, rows, config, device, temperature=0.0):
     model.eval()
     outputs, truncated_inputs, capped_outputs = [], 0, 0
-    for row in rows:
+    for index, row in enumerate(rows):
         if name == 'basic':
             truncated_inputs += len(tokenizer.encode(row['en']).ids) > config['max_length'] - 1
             source = pad([encode(tokenizer, row['en'], config['max_length'])], device)
@@ -242,6 +242,8 @@ def predict(name, model, tokenizer, rows, config, device, temperature=0.0):
             eos = eos if isinstance(eos, list) else [eos]
             capped_outputs += len(new_ids) >= config['max_new_tokens'] and not any(i in eos for i in new_ids.tolist())
             outputs.append(tokenizer.decode(new_ids, skip_special_tokens=True).strip())
+        if (index + 1) % 50 == 0:
+            print(f'{name}: generated {index + 1}/{len(rows)} sentences (temperature={temperature:g})', flush=True)
     return outputs, {'truncated_inputs': int(truncated_inputs), 'capped_outputs': int(capped_outputs)}
 
 

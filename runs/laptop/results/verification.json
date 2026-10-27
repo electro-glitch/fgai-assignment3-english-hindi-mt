@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "test_hash": "277e8288e56ba73a6015ebb92ce3cea16b728f997622438cfa853db2ffff73b4",
+  "models": [
+    {
+      "model": "basic",
+      "test_samples": 300,
+      "temperature_trials": 10,
+      "scores_recomputed": true,
+      "prediction_file_hash": "c131c92115fa494275353433bb0a67b9487d36d1a97e70663be7c227486300bd"
+    },
+    {
+      "model": "mt5",
+      "test_samples": 300,
+      "temperature_trials": 10,
+      "scores_recomputed": true,
+      "prediction_file_hash": "ec20130f611ada8b9b680b277a4fab797e6cb401cf3f7dc0019d6664eb72ca34"
+    },
+    {
+      "model": "llama",
+      "test_samples": 300,
+      "temperature_trials": 10,
+      "scores_recomputed": true,
+      "prediction_file_hash": "596e81148d9e80619894b56daddb9128f3a3cf86d2bf5f7fe9d4b2f3d882b760"
+    },
+    {
+      "model": "gemma",
+      "test_samples": 300,
+      "temperature_trials": 10,
+      "scores_recomputed": true,
+      "prediction_file_hash": "6f90fb1a066ec55ed52145ae982cf6b200d709ea960c01a09b1b2db5ce9a9e5a"
+    }
+  ]
+}

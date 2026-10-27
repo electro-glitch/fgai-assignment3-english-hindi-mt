@@ -13,7 +13,10 @@ def report(run):
     run = Path(run)
     folder = run / 'results'
     folder.mkdir(parents=True, exist_ok=True)
-    manifest = read_json(run / 'data/manifest.json')
+    manifest_path = run / 'data/manifest.json'
+    if not manifest_path.exists():
+        manifest_path = folder / 'dataset_manifest.json'
+    manifest = read_json(manifest_path)
     save_json(folder / 'dataset_manifest.json', manifest)
     rows, predictions, missing = [], {}, []
     for name in MODELS:
@@ -123,7 +126,9 @@ def report(run):
               'Mitigations: diverse and documented training data; subgroup evaluation with adequate sample sizes; preserve names, numbers and uncertainty; '
               'human review for consequential translations; display limitations; avoid private data in public outputs; provide correction and escalation channels. '
               'Automatic translation must not be the sole basis for medical, legal, or safety decisions.', '',
-              '## Generated samples', '', 'See samples.html for side-by-side outputs and predictions/*.json for the full test translations.']
+              '## Generated samples', '', 'See samples.html for side-by-side outputs and predictions/*.json for the full test translations.', '',
+              '## Completed-run analysis', '',
+              'After all four runs, see [comparison and conclusion](ANALYSIS.md), [qualitative review](QUALITATIVE_REVIEW.md), and [score verification](verification.json).']
     (folder / 'REPORT.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
     # Keep the submission README tied to the main run, never to smoke-test scores.
     from .common import ROOT
@@ -162,11 +167,18 @@ def report(run):
                                 'human_category': '', 'human_evidence': '', 'suggested_correction': ''})
         tables.append('</table></html>')
         (folder / 'samples.html').write_text('\n'.join(tables), encoding='utf-8')
-        # Do not overwrite a human review on regeneration.
+        # Add newly completed models while preserving human notes on regeneration.
         review_path = folder / 'ethics_review.csv'
-        if not review_path.exists():
-            with review_path.open('w', newline='', encoding='utf-8-sig') as handle:
-                writer = csv.DictWriter(handle, fieldnames=list(records[0]))
-                writer.writeheader()
-                writer.writerows(records)
+        prior = {}
+        if review_path.exists():
+            with review_path.open(encoding='utf-8-sig', newline='') as handle:
+                prior = {(row['id'], row['model']): row for row in csv.DictReader(handle)}
+        for row in records:
+            old = prior.get((row['id'], row['model']), {})
+            for field in ('human_category', 'human_evidence', 'suggested_correction'):
+                row[field] = old.get(field, '')
+        with review_path.open('w', newline='', encoding='utf-8-sig') as handle:
+            writer = csv.DictWriter(handle, fieldnames=list(records[0]))
+            writer.writeheader()
+            writer.writerows(records)
     print(f'Report saved to {folder / "REPORT.md"}')

@@ -9,5 +9,11 @@ checkpoints/
 *.log
 *.tmp
 .env
+.env.*
+*.pem
+*.key
+credentials*.json
+secrets*.json
 submission/
 tmp/
+runs/smoke/

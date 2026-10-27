@@ -67,3 +67,11 @@ def test_report_rejects_misaligned_test(tmp_path):
     save_json(tmp_path / 'results/basic.json', {'test_hash': 'wrong', 'config_hash': 'config'})
     with pytest.raises(ValueError, match='different test'):
         report(tmp_path)
+
+
+def test_report_uses_published_manifest_without_raw_dataset(tmp_path):
+    from project.report import report
+    save_json(tmp_path / 'results/dataset_manifest.json',
+              {'test_hash': 'correct', 'config_hash': 'config', 'revision': 'rev'})
+    report(tmp_path)
+    assert 'INCOMPLETE' in (tmp_path / 'results/REPORT.md').read_text(encoding='utf-8')

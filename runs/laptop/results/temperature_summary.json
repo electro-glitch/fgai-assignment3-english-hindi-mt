@@ -34,5 +34,113 @@
     "bleu_sd": 0.03537990437986298,
     "chrf_mean": 13.39752944960689,
     "chrf_sd": 0.30264979374817524
+  },
+  {
+    "model": "mt5",
+    "temperature": 0.0,
+    "runs": 1,
+    "bleu_mean": 0.40053020030537195,
+    "bleu_sd": 0.0,
+    "chrf_mean": 10.728652951571299,
+    "chrf_sd": 0.0
+  },
+  {
+    "model": "mt5",
+    "temperature": 0.3,
+    "runs": 3,
+    "bleu_mean": 0.6616441012572116,
+    "bleu_sd": 0.3742697012036584,
+    "chrf_mean": 13.679294604311805,
+    "chrf_sd": 0.8874390141679875
+  },
+  {
+    "model": "mt5",
+    "temperature": 0.7,
+    "runs": 3,
+    "bleu_mean": 0.7802657548652008,
+    "bleu_sd": 0.3279592517298,
+    "chrf_mean": 14.635240775422915,
+    "chrf_sd": 1.1403733298599277
+  },
+  {
+    "model": "mt5",
+    "temperature": 1.0,
+    "runs": 3,
+    "bleu_mean": 0.5199797339293809,
+    "bleu_sd": 0.22812160844613436,
+    "chrf_mean": 14.0349731254211,
+    "chrf_sd": 0.4261964975990919
+  },
+  {
+    "model": "llama",
+    "temperature": 0.0,
+    "runs": 1,
+    "bleu_mean": 5.383780223141517,
+    "bleu_sd": 0.0,
+    "chrf_mean": 28.475081494698852,
+    "chrf_sd": 0.0
+  },
+  {
+    "model": "llama",
+    "temperature": 0.3,
+    "runs": 3,
+    "bleu_mean": 5.292765870159113,
+    "bleu_sd": 0.14740615141466196,
+    "chrf_mean": 27.568817773309917,
+    "chrf_sd": 0.46438621078150394
+  },
+  {
+    "model": "llama",
+    "temperature": 0.7,
+    "runs": 3,
+    "bleu_mean": 4.551114616804353,
+    "bleu_sd": 0.2933261910352489,
+    "chrf_mean": 25.256373721123722,
+    "chrf_sd": 0.39161135840553574
+  },
+  {
+    "model": "llama",
+    "temperature": 1.0,
+    "runs": 3,
+    "bleu_mean": 1.0089187290791135,
+    "bleu_sd": 0.15254247658965062,
+    "chrf_mean": 15.338155066590387,
+    "chrf_sd": 1.6642657375566
+  },
+  {
+    "model": "gemma",
+    "temperature": 0.0,
+    "runs": 1,
+    "bleu_mean": 12.903371938676479,
+    "bleu_sd": 0.0,
+    "chrf_mean": 38.280295787564384,
+    "chrf_sd": 0.0
+  },
+  {
+    "model": "gemma",
+    "temperature": 0.3,
+    "runs": 3,
+    "bleu_mean": 12.657795137600717,
+    "bleu_sd": 0.5172247154591528,
+    "chrf_mean": 36.956960775408064,
+    "chrf_sd": 0.05817457652139566
+  },
+  {
+    "model": "gemma",
+    "temperature": 0.7,
+    "runs": 3,
+    "bleu_mean": 11.496395891811352,
+    "bleu_sd": 0.8048212494430157,
+    "chrf_mean": 36.43546374428045,
+    "chrf_sd": 0.5234993720913276
+  },
+  {
+    "model": "gemma",
+    "temperature": 1.0,
+    "runs": 3,
+    "bleu_mean": 11.144504154221975,
+    "bleu_sd": 0.7118037710097626,
+    "chrf_mean": 34.45506093506399,
+    "chrf_sd": 0.6331385412672689
   }
 ]

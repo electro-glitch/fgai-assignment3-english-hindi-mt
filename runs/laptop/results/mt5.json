@@ -1,0 +1,39 @@
+{
+  "model": "mt5",
+  "device": "cuda",
+  "torch_version": "2.6.0+cu124",
+  "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+  "test_hash": "277e8288e56ba73a6015ebb92ce3cea16b728f997622438cfa853db2ffff73b4",
+  "config_hash": "d148c390f0eed02f33281c6c84147227130c4f29049bdb147e3fb6fa6a0da432",
+  "n_test": 300,
+  "inference_seconds": 407.58420159993693,
+  "seconds_per_sentence": 1.358614005333123,
+  "peak_cuda_allocated_mb": 1157.62548828125,
+  "adaptation": "LoRA fine-tuning (q,v; rank 8 by default)",
+  "model_id": "google/mt5-small",
+  "revision": "73fb5dbe4756edadc8fbe8c769b0a109493acf7a",
+  "dtype": "torch.bfloat16",
+  "training_seconds": 2013.0098987000529,
+  "microbatch_size": 4,
+  "gradient_accumulation": 4,
+  "history": [
+    {
+      "epoch": 1,
+      "train": 6.840717530973255,
+      "validation": 3.4605891719745223
+    },
+    {
+      "epoch": 2,
+      "train": 4.633699954134162,
+      "validation": 3.2130303116469516
+    }
+  ],
+  "parameters": 300520832,
+  "trainable_parameters": 344064,
+  "truncated_inputs": 0,
+  "capped_outputs": 159,
+  "bleu": 0.35152161663229137,
+  "chrf": 10.541117820568106,
+  "bleu_signature": "nrefs:1|case:mixed|eff:no|tok:intl|smooth:exp|version:2.5.1",
+  "chrf_signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:0|space:no|version:2.5.1"
+}

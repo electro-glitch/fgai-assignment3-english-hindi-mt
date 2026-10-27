@@ -4,7 +4,7 @@ ICT4403 Foundations of Generative AI, Assignment 3. This project compares a basi
 
 ## Current status
 
-The project implements all four required methods. See **Latest measured results** below and the linked report for experiment completion and scores. LLaMA and Gemma require approved Hugging Face access and local login. Scores, generated samples and a winning model are reported only after actual execution. Tests use synthetic fixtures to validate software behavior; they are not assignment results.
+All four model runs and temperature experiments are complete on the shared 300-sentence test set. **gemma ranks first by chrF (37.31), with BLEU 11.76.** See the measured results below, the [score verification](runs/laptop/results/verification.json), and the [qualitative review](runs/laptop/results/QUALITATIVE_REVIEW.md). The translations still contain consequential errors; the reported winner is specific to this experiment. Unit-test fixtures are separate from these real-data results.
 
 ## Dataset
 
@@ -19,11 +19,11 @@ Streaming avoids a full in-memory dataset but still reads the corpus over the ne
 | Model | Method | Resource choices |
 |---|---|---|
 | Basic Transformer | From-scratch PyTorch encoder–decoder; sinusoidal positions; causal decoder mask | 192 hidden units, 3 encoder + 3 decoder layers, 4 heads, 8k byte-level BPE vocabulary, batch 16 |
-| [mT5-small](https://huggingface.co/google/mt5-small) | Actual supervised LoRA fine-tuning of query/value projections | Rank 8, batch 1, accumulate 16, checkpoint activations, BF16 on supported CUDA / FP32 on CPU |
+| [mT5-small](https://huggingface.co/google/mt5-small) | Actual supervised LoRA fine-tuning of query/value projections | Rank 8, reported run uses microbatch 4 × accumulation 4; conservative default 1 × 16; activation checkpointing; BF16 on supported CUDA / FP32 on CPU |
 | [LLaMA 3.2 1B Instruct](https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct) | Zero-shot translation prompting | BF16/FP16 inference, batch 1, one model per process |
 | [Gemma 3 1B IT](https://huggingface.co/google/gemma-3-1b-it) | Zero-shot translation prompting | BF16/FP16 inference, batch 1, one model per process |
 
-The assignment allows prompting for decoder-only models. This avoids optimizer memory for the two 1B models. mT5 is multilingual pretrained but is not already an instruction translation model; short LoRA runs can still perform poorly. Gemma's small variant has limited Hindi capability; report its measured result honestly. Approximate names such as “1B” are not parameter measurements; the pipeline counts loaded parameters, including adapter parameters where applicable.
+The assignment allows prompting for decoder-only models. This avoids optimizer memory for the two 1B models. mT5 is multilingual pretrained but is not already an instruction translation model; short LoRA runs can still perform poorly. Hindi translation capability is assessed from actual outputs, not assumed from a model-family name. Approximate names such as “1B” are not parameter measurements; the pipeline counts loaded parameters, including adapter parameters where applicable.
 
 The default caps encoder input/training targets at 96 tokens and generated output at 96 tokens. Decoder prompts allow 512 input tokens to accommodate instructions. Source strings and references remain identical, but tokenization and truncation differ; those differences are recorded and must be discussed. The output cap is comparable in tokens, not characters. FP16 is intentionally avoided for mT5 training because it can overflow. No bitsandbytes or Linux-specific setup is required.
 
@@ -100,25 +100,68 @@ Potential harms include stereotypes introduced through gender agreement, invente
 
 1. Complete all four real-data runs. Open the generated report, plots and translations. Add evidence-based human ethical observations and a discussion of temperature results.
 2. Update this README's status with the measured results and conclusion, linking the actual run report. Do not use smoke-run scores as final results.
-3. Create a GitHub repository and upload Python source, configuration, README, generated results/plots and permissible sample outputs. Exclude virtual environments, tokens, model weights and caches. Dataset source is linked above.
+3. The public repository contains Python source, configuration, results/plots and generated translation samples required by the assignment. Model weights and adapters remain local, together with virtual environments, tokens and caches. Saved predictions allow independent score verification without downloading or training models. Dataset source is linked above.
 4. Create `YourName_RegNum_FGAI_Assignment3.docx` with your name, registration number, assignment title, system title (**English to Hindi Translation with Transformer mT5 LLaMA and Gemma**), dataset name/link, and GitHub URL. `submission_cover_template.txt` supplies the fields; replace every placeholder.
 5. Save the Word cover as PDF, check the links, and submit the PDF to LMS yourself.
 
-No GitHub repository or LMS submission is created automatically. The cover cannot be finalized without your name, registration number and repository URL.
+The project is published at [electro-glitch/fgai-assignment3-english-hindi-mt](https://github.com/electro-glitch/fgai-assignment3-english-hindi-mt). Personalized Word and PDF covers are prepared locally in `submission/`. The user will upload the final PDF to the LMS. The experiment runner does not automatically publish to GitHub or submit to an LMS.
+
+To regenerate a personalized cover, install `requirements-documents.txt` and run:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/build_submission.py --name "Your Name" --registration "YourRegNum" --repository "https://github.com/your-user/your-repo"
+```
+
+Open the generated Word file and export it as PDF. Identity details stay in the local submission directory, which is excluded from Git.
+
+## Verifying the published results
+
+Saved predictions and metadata support verification without model downloads or training:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/verify_results.py runs/laptop
+.\.venv\Scripts\python.exe -m project report --run runs/laptop
+.\.venv\Scripts\python.exe scripts/summarize_results.py runs/laptop
+```
+
+Gemma's final inference timing was repeated after charger connection, with all 300 predictions exactly matching the initial run. The initial partly battery-powered measurement is preserved in `runs/laptop/results/gemma_initial_timing.json`. Timing comparisons remain sensitive to laptop power and thermal conditions.
 
 <!-- MEASURED_RESULTS -->
 
 ## Latest measured results
 
-Status: INCOMPLETE; missing mt5, llama, gemma
+Status: All four primary model runs available.
 
 Dataset revision: `321516f50bdcc1214fa75164c545478976ed84bd`. Test fingerprint: `277e8288e56ba73a6015ebb92ce3cea16b728f997622438cfa853db2ffff73b4`.
 
 | Model | BLEU | chrF | Training seconds | Inference seconds | Parameters |
 |---|---:|---:|---:|---:|---:|
 | basic | 0.49 | 12.91 | 23263.0 | 128.53 | 6,195,776 |
+| mt5 | 0.35 | 10.54 | 2013.0 | 407.58 | 300,520,832 |
+| llama | 5.71 | 26.94 | N/A (prompting) | 414.57 | 1,235,814,400 |
+| gemma | 11.76 | 37.31 | N/A (prompting) | 760.44 | 999,885,952 |
 
-No four-model winner can be identified until all required runs are complete.
+Best measured model by predeclared primary metric chrF (BLEU breaks ties): **gemma**.
+This ranking applies only to this subset and protocol; no significance test or universal superiority is claimed.
 
 
 [Full report and analysis](runs/laptop/results/REPORT.md)
+
+<!-- ANALYSIS_SUMMARY -->
+
+## Measured comparison and temperature findings
+
+The best model by chrF is **gemma** (37.31); the fastest measured inference is **basic** (0.428 seconds per sentence). Size, pretraining, tokenization, precision, generation caching and adaptation methods differ, so this does not isolate an architecture effect.
+
+| Model | Greedy chrF | T=0.3 chrF | T=0.7 chrF | T=1 chrF |
+|---|---:|---:|---:|---:|
+| basic | 13.66 | 14.14 | 14.20 | 13.40 |
+| mt5 | 10.73 | 13.68 | 14.64 | 14.03 |
+| llama | 28.48 | 27.57 | 25.26 | 15.34 |
+| gemma | 38.28 | 36.96 | 36.44 | 34.46 |
+
+Temperature numbers use the fixed 50-sentence subset, not the full 300-sentence benchmark. Positive temperatures average three seeds. These observations do not establish statistical significance or justify tuning on the test set.
+
+[Detailed comparison and conclusion](runs/laptop/results/ANALYSIS.md) · [Actual translation evidence and ethical analysis](runs/laptop/results/QUALITATIVE_REVIEW.md) · [Independent score recomputation](runs/laptop/results/verification.json)
+
+**Conclusion:** use the measured winner only as the strongest model within this limited experiment. The observed hallucinations, omissions and cultural/identity errors require further validation and qualified human review for consequential use.

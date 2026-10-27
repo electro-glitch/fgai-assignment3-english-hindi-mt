@@ -9,3 +9,7 @@ foreach ($stage in @('prepare', 'basic', 'mt5', 'llama', 'gemma', 'report')) {
         throw "Stage $stage failed. Resolve the error and rerun this stage; completed outputs are retained."
     }
 }
+& $python scripts/verify_results.py $Run
+if ($LASTEXITCODE -ne 0) { throw 'Result verification failed' }
+& $python scripts/summarize_results.py $Run
+if ($LASTEXITCODE -ne 0) { throw 'Analysis generation failed' }

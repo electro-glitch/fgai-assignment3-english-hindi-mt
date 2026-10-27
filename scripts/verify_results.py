@@ -9,8 +9,13 @@ from project.experiment import score
 def verify(run):
     run = Path(run)
     config = read_json(run / 'config.json')
-    manifest = read_json(run / 'data/manifest.json')
-    reference = read_json(run / 'data/test.json')
+    manifest_path = run / 'data/manifest.json'
+    if not manifest_path.exists():
+        manifest_path = run / 'results/dataset_manifest.json'
+    manifest = read_json(manifest_path)
+    reference_path = run / 'data/test.json'
+    reference = (read_json(reference_path) if reference_path.exists() else
+                 [{k: row[k] for k in ('en', 'hi', 'id')} for row in read_json(run / 'predictions/basic.json')])
     assert digest(reference) == manifest['test_hash']
     records = []
     for name in ('basic', 'mt5', 'llama', 'gemma'):

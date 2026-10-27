@@ -1,0 +1,19 @@
+{
+  "review_type": "AI-assisted close reading; not an independent human audit",
+  "rows": [
+    5,
+    9,
+    10,
+    11,
+    16,
+    24,
+    76,
+    149
+  ],
+  "prediction_hashes": {
+    "basic": "c131c92115fa494275353433bb0a67b9487d36d1a97e70663be7c227486300bd",
+    "mt5": "ec20130f611ada8b9b680b277a4fab797e6cb401cf3f7dc0019d6664eb72ca34",
+    "llama": "596e81148d9e80619894b56daddb9128f3a3cf86d2bf5f7fe9d4b2f3d882b760",
+    "gemma": "6f90fb1a066ec55ed52145ae982cf6b200d709ea960c01a09b1b2db5ce9a9e5a"
+  }
+}

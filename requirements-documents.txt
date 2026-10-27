@@ -1,0 +1,2 @@
+# Optional: only for regenerating the submission cover.
+python-docx==1.2.0
