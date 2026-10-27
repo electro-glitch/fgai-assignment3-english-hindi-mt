@@ -96,23 +96,6 @@ Read generated outputs, not just scores. For each model, inspect examples involv
 
 Potential harms include stereotypes introduced through gender agreement, invented information, dropped uncertainty, loss of cultural meaning, and stronger or weaker wording for sensitive content. Mitigations include broader data coverage, subgroup evaluation, terminology checks, human review for consequential content, clear limitations, privacy protection and correction channels. BLEU/chrF cannot establish fairness or factual safety.
 
-## Submission checklist
-
-1. Complete all four real-data runs. Open the generated report, plots and translations. Add evidence-based human ethical observations and a discussion of temperature results.
-2. Update this README's status with the measured results and conclusion, linking the actual run report. Do not use smoke-run scores as final results.
-3. The public repository contains Python source, configuration, results/plots and generated translation samples required by the assignment. Model weights and adapters remain local, together with virtual environments, tokens and caches. Saved predictions allow independent score verification without downloading or training models. Dataset source is linked above.
-4. Create `YourName_RegNum_FGAI_Assignment3.docx` with your name, registration number, assignment title, system title (**English to Hindi Translation with Transformer mT5 LLaMA and Gemma**), dataset name/link, and GitHub URL. `submission_cover_template.txt` supplies the fields; replace every placeholder.
-5. Save the Word cover as PDF, check the links, and submit the PDF to LMS yourself.
-
-The project is published at [electro-glitch/fgai-assignment3-english-hindi-mt](https://github.com/electro-glitch/fgai-assignment3-english-hindi-mt). Personalized Word and PDF covers are prepared locally in `submission/`. The user will upload the final PDF to the LMS. The experiment runner does not automatically publish to GitHub or submit to an LMS.
-
-To regenerate a personalized cover, install `requirements-documents.txt` and run:
-
-```powershell
-.\.venv\Scripts\python.exe scripts/build_submission.py --name "Your Name" --registration "YourRegNum" --repository "https://github.com/your-user/your-repo"
-```
-
-Open the generated Word file and export it as PDF. Identity details stay in the local submission directory, which is excluded from Git.
 
 ## Verifying the published results
 
@@ -134,12 +117,12 @@ Status: All four primary model runs available.
 
 Dataset revision: `321516f50bdcc1214fa75164c545478976ed84bd`. Test fingerprint: `277e8288e56ba73a6015ebb92ce3cea16b728f997622438cfa853db2ffff73b4`.
 
-| Model | BLEU | chrF | Training seconds | Inference seconds | Parameters |
-|---|---:|---:|---:|---:|---:|
-| basic | 0.49 | 12.91 | 23263.0 | 128.53 | 6,195,776 |
-| mt5 | 0.35 | 10.54 | 2013.0 | 407.58 | 300,520,832 |
-| llama | 5.71 | 26.94 | N/A (prompting) | 414.57 | 1,235,814,400 |
-| gemma | 11.76 | 37.31 | N/A (prompting) | 760.44 | 999,885,952 |
+| Model | BLEU | chrF  | Inference seconds | Parameters |
+|---|---:|---:|---:|---:|
+| basic | 0.49 | 12.91 | 128.53 | 6,195,776 |
+| mt5 | 0.35 | 10.54 | 407.58 | 300,520,832 |
+| llama | 5.71 | 26.94 | 414.57 | 1,235,814,400 |
+| gemma | 11.76 | 37.31 | 760.44 | 999,885,952 |
 
 Best measured model by predeclared primary metric chrF (BLEU breaks ties): **gemma**.
 This ranking applies only to this subset and protocol; no significance test or universal superiority is claimed.
